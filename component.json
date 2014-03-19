@@ -1,0 +1,20 @@
+{
+  "name": "virtualdom",
+  "repo": "Swatinem/virtualdom",
+  "version": "0.0.1",
+  "description": "tools to work with a virtual dom",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": [
+    "index.js",
+    "lib/fromdom.js",
+    "lib/todom.js"
+  ],
+  "dependencies": {
+  },
+  "development": {
+    "component/domify": "*",
+    "chaijs/chai": "*"
+  },
+  "license": "LGPLv3"
+}

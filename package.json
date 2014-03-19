@@ -1,0 +1,26 @@
+{
+  "name": "virtualdom",
+  "private": true,
+  "description": "tools to work with a virtual dom",
+  "version": "0.0.1",
+  "keywords": [],
+  "main": "./index",
+  "maintainers": [
+    "Arpad Borsos <arpad.borsos@googlemail.com> (http://swatinem.de)"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "component": "*",
+    "component-test": "Swatinem/component-test",
+    "component-istanbul": "*",
+    "istanbul": "*",
+    "coveralls": "*",
+    "jshint": "*"
+  },
+  "scripts": {
+    "test": "make test-coveralls"
+  },
+  "repository": "git://github.com/Swatinem/virtualdom.git",
+  "license": "LGPLv3"
+}
