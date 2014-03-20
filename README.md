@@ -38,6 +38,10 @@ Creates a virtual dom node for the real DOM `node`.
 
 Creates a real DOM node for the virtual dom `vnode`.
 
+### applyPatch(node, patches)
+
+Applies a list of patches, see below for patch details
+
 ## Internal data structures
 
 ### Virtual DOM Node
@@ -69,7 +73,7 @@ since they have array or hashtable-like accessors in the real DOM.
 {
 	type: 'insert' || 'remove' || 'set',
 	which: 'node' || 'attribute' || 'class' || 'style' || 'data',
-	depth: [], // this is the position of the target DOM node as a chain of child positions
+	depth: [], // the position of the target DOM node as a chain of child positions
 	node: virtualDomNode, // in case we `insert` a `node`
 	before: 0, // in case we `insert` a `node`
 	class: className, // in case we `insert` or `remove` a `class`
