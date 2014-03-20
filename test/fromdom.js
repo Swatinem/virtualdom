@@ -23,9 +23,9 @@ describe('fromDOM', function () {
 	});
 	it('should include the id', function () {
 		var el = domify('<h1 id="foo"></h1>');
-		fromDOM(el).should.include({id: 'foo'});
+		fromDOM(el).attributes.should.include({id: 'foo'});
 		el = domify('<br id="bar" />');
-		fromDOM(el).should.include({id: 'bar'});
+		fromDOM(el).attributes.should.include({id: 'bar'});
 	});
 	it('should give a list of classes', function () {
 		var el = domify('<h1 class="foo"></h1>');
@@ -57,7 +57,7 @@ describe('fromDOM', function () {
 		el = domify('<h1 foo="bar" value="foo" bgcolor="bar"></h1>');
 		fromDOM(el).attributes.should.include({foo: 'bar', value: 'foo', bgcolor: 'bar'});
 		el = domify('<h1 id="foo" class="bar" style="margin: 10px;" data-foo="bar" data-foo-bar="foobar"></h1>');
-		fromDOM(el).attributes.should.eql({});
+		fromDOM(el).attributes.should.eql({id: 'foo'});
 	});
 	it('should generate a list of children', function () {
 		var el = domify('<h1>text1<!--comment-->text2<br id="foo" />text3</h1>');
@@ -66,7 +66,8 @@ describe('fromDOM', function () {
 		v.children[0].should.eql('text1');
 		v.children[1].should.eql({comment: 'comment'});
 		v.children[2].should.eql('text2');
-		v.children[3].should.include({tag: 'br', id: 'foo'});
+		v.children[3].should.include({tag: 'br'});
+		v.children[3].attributes.should.include({id: 'foo'});
 		v.children[4].should.eql('text3');
 	});
 	it('should handle svg', function () {

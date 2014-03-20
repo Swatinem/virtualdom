@@ -26,11 +26,10 @@ describe('toDOM', function () {
 	it('should create elements with ids', function () {
 		var vnode = {
 			tag: 'h1',
-			id: 'id',
 			class: [],
 			data: {},
 			style: {},
-			attributes: {},
+			attributes: {id: 'id'},
 			children: []
 		};
 		var node = toDOM(vnode);
@@ -118,7 +117,7 @@ describe('toDOM', function () {
 			tag: 'h1', class: [], data: {}, style: {}, attributes: {},
 			children: [
 				'text1', {comment: 'comment'}, 'text2',
-				{tag: 'br', id: 'foo', class: [], data: {}, style: {}, attributes: {}, children: []},
+				{tag: 'br', class: [], data: {}, style: {}, attributes: {id: 'foo'}, children: []},
 				'text3'
 			]
 		};

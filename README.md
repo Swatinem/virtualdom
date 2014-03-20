@@ -43,13 +43,15 @@ And a normal node is represented as:
 	key: 'optional internal identifier used for sorting',
 	tag: 'div',
 	ns: 'optional namespace, like "http://www.w3.org/2000/svg" for svg'
-	id: 'id',
 	class: ['array', 'of', 'classes'],
 	style: {position: 'absolute', borderRadius: '5px'},
 	data: {dataset: 'key value pairs'}
-	attributes: {'value': 'key value pairs for attributes'}
+	attributes: {'id': 'id', 'value': 'key value pairs for attributes'}
 }
 ```
+
+`class`, `data` and `style` are handled separately from other attributes
+since they have array or hashtable-like accessors in the real DOM.
 
 ## License
 
