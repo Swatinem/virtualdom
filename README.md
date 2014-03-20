@@ -63,6 +63,21 @@ And a normal node is represented as:
 `class`, `data` and `style` are handled separately from other attributes
 since they have array or hashtable-like accessors in the real DOM.
 
+### Patch
+
+```js
+{
+	type: 'insert' || 'remove' || 'set',
+	which: 'node' || 'attribute' || 'class' || 'style' || 'data',
+	depth: [], // this is the position of the target DOM node as a chain of child positions
+	node: virtualDomNode, // in case we `insert` a `node`
+	before: 0, // in case we `insert` a `node`
+	class: className, // in case we `insert` or `remove` a `class`
+	key: key, // name of the `attribute`, `style` or `data` we want to `set` or `remove`
+	value: value // value of the `attribute`, `style` or `data` we want to `set`
+}
+```
+
 ## License
 
   LGPLv3
