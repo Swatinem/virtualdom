@@ -30,6 +30,16 @@ And of course, I don’t want to merely *use* a library. I want to
 
 ## Usage
 
+### fromDOM(node)
+
+Creates a virtual dom node for the real DOM `node`.
+
+### toDOM(vnode)
+
+Creates a real DOM node for the virtual dom `vnode`.
+
+## Internal data structures
+
 ### Virtual DOM Node
 
 A text node is simply a js string.
