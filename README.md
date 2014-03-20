@@ -6,6 +6,24 @@ tools to work with a virtual dom
 [![Coverage Status](https://coveralls.io/repos/Swatinem/virtualdom/badge.png?branch=master)](https://coveralls.io/r/Swatinem/virtualdom)
 [![Dependency Status](https://gemnasium.com/Swatinem/virtualdom.png)](https://gemnasium.com/Swatinem/virtualdom)
 
+## Inspiration
+
+[React](http://facebook.github.io/react/) is probably the first to have done this
+and gain massive hype with it. However it grew extremely large, being >500k
+unminified.
+
+[mithril.js](https://github.com/lhorie/mithril.js) also has a virtual dom and
+claims to do dom diffing. However, it is a complete MVC framework, complete with
+its own promises implementation, xhr, etc. But at least it is very small, although
+not very readable.
+
+[virtual-dom](https://github.com/Matt-Esch/virtual-dom) seems like a very good
+solution. It is made for use with browserify and pulls in the complete `semver`
+package as a dependency *facepalm*.
+
+And of course, I don’t want to merely *use* a library. I want to
+*know and understand* the technology, so I might as well implement it myself :-)
+
 ## Installation
 
     $ component install Swatinem/virtualdom
