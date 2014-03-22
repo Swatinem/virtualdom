@@ -26,11 +26,7 @@ describe('toDOM', function () {
 	it('should create elements with ids', function () {
 		var vnode = {
 			tag: 'h1',
-			class: [],
-			data: {},
-			style: {},
-			attributes: {id: 'id'},
-			children: []
+			attributes: {id: 'id'}
 		};
 		var node = toDOM(vnode);
 		node.nodeType.should.eql(Node.ELEMENT_NODE);
@@ -41,11 +37,7 @@ describe('toDOM', function () {
 	it('should handle classes', function () {
 		var vnode = {
 			tag: 'h1',
-			class: ['foo', 'bar', 'foo-bar', 'foo_bar'],
-			data: {},
-			style: {},
-			attributes: {},
-			children: []
+			class: ['foo', 'bar', 'foo-bar', 'foo_bar']
 		};
 		var node = toDOM(vnode);
 		node.nodeType.should.eql(Node.ELEMENT_NODE);
@@ -56,11 +48,7 @@ describe('toDOM', function () {
 	it('should handle data attributes', function () {
 		var vnode = {
 			tag: 'h1',
-			class: [],
-			data: {foo: 'bar', bar: 'foo', fooBar: 'foobar'},
-			style: {},
-			attributes: {},
-			children: []
+			data: {foo: 'bar', bar: 'foo', fooBar: 'foobar'}
 		};
 		var node = toDOM(vnode);
 		node.nodeType.should.eql(Node.ELEMENT_NODE);
@@ -72,17 +60,13 @@ describe('toDOM', function () {
 	it('should handle styles', function () {
 		var vnode = {
 			tag: 'h1',
-			class: [],
-			data: {},
 			style: {
 				position: 'absolute',
 				top: '0px',
 				// XXX: these are inconsistent throughout browsers
 				//margin: '0px 1px 2px 3px',
 				//borderRadius: '5px'
-			},
-			attributes: {},
-			children: []
+			}
 		};
 		var node = toDOM(vnode);
 		node.nodeType.should.eql(Node.ELEMENT_NODE);
@@ -95,11 +79,7 @@ describe('toDOM', function () {
 	it('should handle other attributes', function () {
 		var vnode = {
 			tag: 'input',
-			class: [],
-			data: {},
-			style: {},
-			attributes: {foo: 'bar', value: 'bar', bgcolor: 'red'},
-			children: []
+			attributes: {foo: 'bar', value: 'bar', bgcolor: 'red'}
 		};
 		var node = toDOM(vnode);
 		node.nodeType.should.eql(Node.ELEMENT_NODE);
@@ -114,10 +94,10 @@ describe('toDOM', function () {
 	});
 	it('should handle child nodes', function () {
 		var vnode = {
-			tag: 'h1', class: [], data: {}, style: {}, attributes: {},
+			tag: 'h1',
 			children: [
 				'text1', {comment: 'comment'}, 'text2',
-				{tag: 'br', class: [], data: {}, style: {}, attributes: {id: 'foo'}, children: []},
+				{tag: 'br', attributes: {id: 'foo'}},
 				'text3'
 			]
 		};
@@ -137,10 +117,10 @@ describe('toDOM', function () {
 	});
 	it('should handle svg', function () {
 		var vnode = {
-			tag: 'svg', ns: 'http://www.w3.org/2000/svg', class: [], data: {}, style: {}, attributes: {},
+			tag: 'svg', ns: 'http://www.w3.org/2000/svg',
 			children: [
-				{tag: 'path', ns: 'http://www.w3.org/2000/svg', class: [], data: {}, style: {},
-					attributes: {d: 'M150 0 L75 200 L225 200 Z'}, children: []}
+				{tag: 'path', ns: 'http://www.w3.org/2000/svg',
+					attributes: {d: 'M150 0 L75 200 L225 200 Z'}}
 			]
 		};
 		var node = toDOM(vnode);

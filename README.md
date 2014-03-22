@@ -75,14 +75,14 @@ since they have array or hashtable-like accessors in the real DOM.
 	// and patches, which are all optional:
 	addClasses: [],
 	removeClasses: [],
-	addStyles: {},
+	setStyles: {},
 	removeStyles: [],
-	addAttributes: {},
+	setAttributes: {},
 	removeAttributes: [],
-	addData: {},
+	setData: {},
 	removeData: [],
 	setContent: '', // for text and comment nodes
-	children: [childPatches /* see below */]
+	childPatches: [/* see below */]
 }
 // and childPatches:
 {
