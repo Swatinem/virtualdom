@@ -71,14 +71,39 @@ since they have array or hashtable-like accessors in the real DOM.
 
 ```js
 {
-	type: 'insert' || 'remove' || 'set',
-	which: 'node' || 'attribute' || 'class' || 'style' || 'data',
-	depth: [], // the position of the target DOM node as a chain of child positions
-	node: virtualDomNode, // in case we `insert` a `node`
-	before: 0, // in case we `insert` a `node`
-	class: className, // in case we `insert` or `remove` a `class`
-	key: key, // name of the `attribute`, `style` or `data` we want to `set` or `remove`
-	value: value // value of the `attribute`, `style`, `data` or `node` content we want to `set`
+	node: [], // chain of `childNodes` positions, starting at the room node
+	// and patches, which are all optional:
+	addClasses: [],
+	removeClasses: [],
+	addStyles: {},
+	removeStyles: [],
+	addAttributes: {},
+	removeAttributes: [],
+	addData: {},
+	removeData: [],
+	setContent: '', // for text and comment nodes
+	children: [childPatches /* see below */]
+}
+// and childPatches:
+{
+	type: 'insert',
+	child: newChild,
+	index: 0, // optional, will append if not set
+}
+{
+	type: 'replace',
+	child: newChild,
+	index: 0, // required, index of the old child
+}
+{
+	type: 'remove'
+	index: 0
+}
+// might be good to have, but very difficult to implement as a diff
+{
+	type: 'move'
+	from: 0, // old index
+	to: 1 // new index
 }
 ```
 
