@@ -170,18 +170,20 @@ describe('applyPatch', function () {
 	});
 	it('should work on nested child nodes', function () {
 		var node = domify('<div>text<!--comment--><div>text<h1 style="position: relative;"></h1></div></div>');
+		var h1 = node.querySelector('h1');
 		applyPatch(node, {
 			type: 'remove',
 			which: 'style',
 			key: 'position',
 			depth: [2,1]
 		});
-		node.querySelector('h1').style.position.should.eql('');
-		node.querySelector('h1').style.cssText.should.eql('');
+		h1.style.position.should.eql('');
+		h1.style.cssText.should.eql('');
 		node.outerHTML.should.eql('<div>text<!--comment--><div>text<h1></h1></div></div>');
 	});
 	it('should apply an array of patches', function () {
 		var node = domify('<div>text<!--comment--><div>text<h1 style="position: relative;"></h1></div></div>');
+		var h1 = node.querySelector('h1');
 		applyPatch(node, [{
 			type: 'remove',
 			which: 'style',
@@ -193,9 +195,9 @@ describe('applyPatch', function () {
 			class: 'foo',
 			depth: [2,1]
 		}]);
-		node.querySelector('h1').style.position.should.eql('');
-		node.querySelector('h1').style.cssText.should.eql('');
-		node.querySelector('h1').className.should.eql('foo');
+		h1.style.position.should.eql('');
+		h1.style.cssText.should.eql('');
+		h1.className.should.eql('foo');
 		node.outerHTML.should.eql('<div>text<!--comment--><div>text<h1 class="foo"></h1></div></div>');
 	});
 	it('should insert new nodes', function () {
@@ -232,6 +234,30 @@ describe('applyPatch', function () {
 		});
 		should.not.exist(node.querySelector('h1'));
 		node.outerHTML.should.eql('<div>text<!--comment--><div>text</div></div>');
+	});
+	it('should change the content of text nodes', function () {
+		var node = domify('<div>text<!--comment--></div>');
+		var text = node.firstChild;
+		applyPatch(node, {
+			type: 'set',
+			which: 'node',
+			value: 'text2',
+			depth: [0]
+		});
+		text.data.should.eql('text2');
+		node.outerHTML.should.eql('<div>text2<!--comment--></div>');
+	});
+	it('should change the content of comment nodes', function () {
+		var node = domify('<div>text<!--comment--></div>');
+		var comment = node.lastChild;
+		applyPatch(node, {
+			type: 'set',
+			which: 'node',
+			value: 'comment2',
+			depth: [1]
+		});
+		comment.data.should.eql('comment2');
+		node.outerHTML.should.eql('<div>text<!--comment2--></div>');
 	});
 });
 

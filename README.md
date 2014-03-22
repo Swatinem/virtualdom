@@ -78,7 +78,7 @@ since they have array or hashtable-like accessors in the real DOM.
 	before: 0, // in case we `insert` a `node`
 	class: className, // in case we `insert` or `remove` a `class`
 	key: key, // name of the `attribute`, `style` or `data` we want to `set` or `remove`
-	value: value // value of the `attribute`, `style` or `data` we want to `set`
+	value: value // value of the `attribute`, `style`, `data` or `node` content we want to `set`
 }
 ```
 
