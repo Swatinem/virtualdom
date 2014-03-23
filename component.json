@@ -8,6 +8,7 @@
   "scripts": [
     "index.js",
     "lib/applypatch.js",
+    "lib/diff.js",
     "lib/fromdom.js",
     "lib/parsestyle.js",
     "lib/todom.js"
