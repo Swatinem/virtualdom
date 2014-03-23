@@ -10,6 +10,7 @@
     "lib/applypatch.js",
     "lib/diff.js",
     "lib/fromdom.js",
+    "lib/levenshtein.js",
     "lib/parsestyle.js",
     "lib/todom.js"
   ],

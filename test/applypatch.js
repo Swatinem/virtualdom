@@ -167,7 +167,7 @@ describe('applyPatch', function () {
 		applyPatch(node, {
 			node: [],
 			childPatches: [
-				{type: 'insert', node: 'text'}
+				{type: 'insert', child: 'text'}
 			]
 		});
 		node.firstChild.nodeType.should.eql(Node.TEXT_NODE);
@@ -179,7 +179,7 @@ describe('applyPatch', function () {
 		applyPatch(node, {
 			node: [],
 			childPatches: [
-				{type: 'insert', node: 'text', index: 0}
+				{type: 'insert', child: 'text', index: 0}
 			]
 		});
 		node.firstChild.nodeType.should.eql(Node.TEXT_NODE);
@@ -202,7 +202,7 @@ describe('applyPatch', function () {
 		applyPatch(node, {
 			node: [2],
 			childPatches: [
-				{type: 'replace', index: 1, node: {tag: 'span', children: ['oh hai']}}
+				{type: 'replace', index: 1, child: {tag: 'span', children: ['oh hai']}}
 			]
 		});
 		should.not.exist(node.querySelector('h1'));

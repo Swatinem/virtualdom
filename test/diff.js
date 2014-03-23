@@ -87,14 +87,87 @@ describe('diff', function () {
 			patches[0]['remove' + what[0]].should.eql(['top', 'position']);
 		});
 	});
-	it.skip('should create patch for child insertion', function () {
-		
+	it('should create patch for child append', function () {
+		var from = {tag: 'div'};
+		var to = {tag: 'div', children: ['text', 'text2']};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].childPatches.length.should.eql(2);
+		patches[0].childPatches[0].should.eql({type: 'insert', child: 'text'});
+		patches[0].childPatches[1].should.eql({type: 'insert', child: 'text2'});
 	});
-	it.skip('should create patch for child removal', function () {
-		
+	it('should create patch for child insert at positions', function () {
+		var from = {tag: 'div', children: [{tag: 'span'}]};
+		var to = {tag: 'div', children: ['text', {tag: 'span'}, 'text2']};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].childPatches.length.should.eql(2);
+		patches[0].childPatches[0].should.eql({type: 'insert', child: 'text', index: 0});
+		patches[0].childPatches[1].should.eql({type: 'insert', child: 'text2', index: 2});
 	});
-	it.skip('should create patch for child replace', function () {
-		
+	it('should create patch for child removal', function () {
+		var from = {tag: 'div', children: ['text', {tag: 'span'}, 'text2']};
+		var to = {tag: 'div', children: [{tag: 'span'}]};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].childPatches.length.should.eql(2);
+		patches[0].childPatches[0].should.eql({type: 'remove', index: 2});
+		patches[0].childPatches[1].should.eql({type: 'remove', index: 0});
+	});
+	it('should create patch to remove all children', function () {
+		var from = {tag: 'div', children: ['text', {tag: 'span'}]};
+		var to = {tag: 'div'};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].childPatches.length.should.eql(2);
+		patches[0].childPatches[0].should.eql({type: 'remove', index: 0});
+		patches[0].childPatches[1].should.eql({type: 'remove', index: 0});
+	});
+	it('should create patch for child replace', function () {
+		var from = {tag: 'div', children: ['text', {tag: 'span'}]};
+		var to = {tag: 'div', children: [{comment: 'comment1'}, {comment: 'comment2'}]};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].childPatches.length.should.eql(2);
+		patches[0].childPatches[0].should.eql({type: 'replace', child: {comment: 'comment1'}, index: 0});
+		patches[0].childPatches[1].should.eql({type: 'replace', child: {comment: 'comment2'}, index: 1});
+	});
+	it('should create diffs for children', function () {
+		var from = {tag: 'div', children: [{tag: 'span'}]};
+		var to = {tag: 'div', children: [{tag: 'span', class: ['foo']}]};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].node.should.eql([0]);
+		patches[0].addClasses.should.eql(['foo']);
+	});
+	it('should modify and insert without `key`', function () {
+		var from = {tag: 'div', children: [{tag: 'span', children: ['span1']}]};
+		var to = {tag: 'div', children: [
+			{tag: 'span', class: ['foo'], children: ['span2']},
+			{tag: 'span', children: ['span1']}
+		]};
+		var patches = diff(from, to);
+		patches.length.should.eql(3);
+		patches[0].node.should.eql([0, 0]);
+		patches[0].setContent.should.eql('span2');
+		patches[1].node.should.eql([0]);
+		patches[1].addClasses.should.eql(['foo']);
+		patches[2].node.should.eql([]);
+		patches[2].childPatches.should.eql([{type: 'insert', index: 1, child: {tag: 'span', children: ['span1']}}]);
+	});
+	it('should take `key` into account', function () {
+		var from = {tag: 'div', children: [{tag: 'span', key: 1, children: ['span1']}]};
+		var span2 = {tag: 'span', key: 2, class: ['foo'], children: ['span2']};
+		var to = {tag: 'div', children: [
+			span2,
+			{tag: 'span', key: 1, children: ['still span1']}
+		]};
+		var patches = diff(from, to);
+		patches.length.should.eql(2);
+		patches[0].node.should.eql([0, 0]);
+		patches[0].setContent.should.eql('still span1');
+		patches[1].node.should.eql([]);
+		patches[1].childPatches.should.eql([{type: 'insert', index: 0, child: span2}]);
 	});
 	it.skip('should create patch for child move', function () {
 		
