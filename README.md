@@ -38,9 +38,13 @@ Creates a virtual dom node for the real DOM `node`.
 
 Creates a real DOM node for the virtual dom `vnode`.
 
+### diff(from, to)
+
+Creates a list of patches to transform `from` to `to`.
+
 ### applyPatch(node, patches)
 
-Applies a list of patches, see below for patch details
+Applies a list of patches, see below for patch details.
 
 ## Internal data structures
 
@@ -106,6 +110,12 @@ since they have array or hashtable-like accessors in the real DOM.
 	to: 1 // new index
 }
 ```
+
+## TODO
+
+* reorder / move child nodes
+* support arrays as children (flatten)
+* support innerHTML for unsafe code
 
 ## License
 
