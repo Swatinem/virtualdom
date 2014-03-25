@@ -115,6 +115,23 @@ describe('toDOM', function () {
 		node.childNodes[4].data.should.eql('text3');
 		node.outerHTML.should.eql('<h1>text1<!--comment-->text2<br id="foo">text3</h1>');
 	});
+	it('should handle arrays in children', function () {
+		var vnode = {
+			tag: 'h1',
+			children: [
+				['text1', 'text2', ['text3']],
+				['text4']
+			]
+		};
+		var node = toDOM(vnode);
+		node.nodeType.should.eql(Node.ELEMENT_NODE);
+		node.tagName.should.eql('H1');
+		node.childNodes.length.should.eql(4);
+		node.childNodes[0].data.should.eql('text1');
+		node.childNodes[1].data.should.eql('text2');
+		node.childNodes[2].data.should.eql('text3');
+		node.childNodes[3].data.should.eql('text4');
+	});
 	it('should handle svg', function () {
 		var vnode = {
 			tag: 'svg', ns: 'http://www.w3.org/2000/svg',

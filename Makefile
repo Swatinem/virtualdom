@@ -6,7 +6,7 @@ test: lint build/build.js
 	@./node_modules/.bin/istanbul report text-summary # on the command line
 
 lint:
-	-./node_modules/.bin/jshint ./test ./index.js
+	-./node_modules/.bin/jshint ./test ./lib ./index.js
 
 components: component.json
 	./node_modules/.bin/component install --dev

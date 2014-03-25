@@ -114,7 +114,6 @@ since they have array or hashtable-like accessors in the real DOM.
 ## TODO
 
 * reorder / move child nodes
-* support arrays as children (flatten)
 * support innerHTML for unsafe code
 
 ## License

@@ -169,6 +169,25 @@ describe('diff', function () {
 		patches[1].node.should.eql([]);
 		patches[1].childPatches.should.eql([{type: 'insert', index: 0, child: span2}]);
 	});
+	it('should flatten the children before diffing', function () {
+		var from = {
+			tag: 'div',
+			children: [
+				['text1', 'text2', [{comment: 'text3'}]],
+				['text4']
+			]
+		};
+		var to = {
+			tag: 'div',
+			children: [
+				[['text1'], 'text2'],
+				[['text4']]
+			]
+		};
+		var patches = diff(from, to);
+		patches.length.should.eql(1);
+		patches[0].childPatches.should.eql([{type: 'remove', index: 2}]);
+	});
 	it.skip('should create patch for child move', function () {
 		
 	});

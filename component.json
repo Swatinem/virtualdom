@@ -9,6 +9,7 @@
     "index.js",
     "lib/applypatch.js",
     "lib/diff.js",
+    "lib/flatten.js",
     "lib/fromdom.js",
     "lib/levenshtein.js",
     "lib/parsestyle.js",
