@@ -188,6 +188,22 @@ describe('diff', function () {
 		patches.length.should.eql(1);
 		patches[0].childPatches.should.eql([{type: 'remove', index: 2}]);
 	});
+	it('should ignore undefined and null in children', function () {
+		var from = {
+			tag: 'div',
+			children: [
+				[null, [undefined]], [['text1']]
+			]
+		};
+		var to = {
+			tag: 'div',
+			children: [
+				[['text1', null], undefined]
+			]
+		};
+		var patches = diff(from, to);
+		patches.length.should.eql(0);
+	});
 	it.skip('should create patch for child move', function () {
 		
 	});

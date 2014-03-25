@@ -132,6 +132,16 @@ describe('toDOM', function () {
 		node.childNodes[2].data.should.eql('text3');
 		node.childNodes[3].data.should.eql('text4');
 	});
+	it('should ignore undefined and null in children', function () {
+		var vnode = {
+			tag: 'h1',
+			children: [[[undefined]], [null]]
+		};
+		var node = toDOM(vnode);
+		node.nodeType.should.eql(Node.ELEMENT_NODE);
+		node.tagName.should.eql('H1');
+		node.childNodes.length.should.eql(0);
+	});
 	it('should handle svg', function () {
 		var vnode = {
 			tag: 'svg', ns: 'http://www.w3.org/2000/svg',
