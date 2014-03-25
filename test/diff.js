@@ -204,6 +204,18 @@ describe('diff', function () {
 		var patches = diff(from, to);
 		patches.length.should.eql(0);
 	});
+	it('should ignore empty classes', function () {
+		var from = {
+			tag: 'div',
+			class: [null, undefined, '', 'foo']
+		};
+		var to = {
+			tag: 'div',
+			class: ['foo']
+		};
+		var patches = diff(from, to);
+		patches.length.should.eql(0);
+	});
 	it.skip('should create patch for child move', function () {
 		
 	});

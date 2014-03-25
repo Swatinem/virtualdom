@@ -142,6 +142,16 @@ describe('toDOM', function () {
 		node.tagName.should.eql('H1');
 		node.childNodes.length.should.eql(0);
 	});
+	it('should ignore empty class names', function () {
+		var vnode = {
+			tag: 'h1',
+			class: ['real', '', undefined, null]
+		};
+		var node = toDOM(vnode);
+		node.nodeType.should.eql(Node.ELEMENT_NODE);
+		node.tagName.should.eql('H1');
+		node.className.should.eql('real');
+	});
 	it('should handle svg', function () {
 		var vnode = {
 			tag: 'svg', ns: 'http://www.w3.org/2000/svg',
