@@ -16,7 +16,7 @@ build/build.js: components $(JS_FILES)
 	./node_modules/.bin/component build --use component-istanbul --dev
 
 test-coveralls: test
-	cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+	-cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 clean:
 	rm -rf build coverage
