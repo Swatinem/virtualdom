@@ -215,6 +215,8 @@ describe('diff', function () {
 		};
 		var patches = diff(from, to);
 		patches.length.should.eql(0);
+		patches = diff(to, from);
+		patches.length.should.eql(0);
 	});
 	it.skip('should create patch for child move', function () {
 		

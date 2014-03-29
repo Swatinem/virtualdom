@@ -63,8 +63,9 @@ And a normal node is represented as:
 	ns: 'optional namespace, like "http://www.w3.org/2000/svg" for svg'
 	class: ['array', 'of', 'classes'],
 	style: {position: 'absolute', borderRadius: '5px'},
-	data: {dataset: 'key value pairs'}
-	attributes: {'id': 'id', 'value': 'key value pairs for attributes'}
+	data: {dataset: 'key value pairs'},
+	attributes: {'id': 'id', 'value': 'key value pairs for attributes'},
+	children: [array, of, children, or, a, single, child]
 }
 ```
 

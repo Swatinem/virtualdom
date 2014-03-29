@@ -186,6 +186,20 @@ describe('applyPatch', function () {
 		node.firstChild.data.should.eql('text');
 		node.outerHTML.should.eql('<div>text<!--comment--></div>');
 	});
+	it('should insert an array of nodes', function () {
+		var node = domify('<div></div>');
+		applyPatch(node, {
+			node: [],
+			childPatches: [
+				{type: 'insert', child: ['text', {comment: 'comment'}]}
+			]
+		});
+		node.firstChild.nodeType.should.eql(Node.TEXT_NODE);
+		node.firstChild.data.should.eql('text');
+		node.lastChild.nodeType.should.eql(Node.COMMENT_NODE);
+		node.lastChild.data.should.eql('comment');
+		node.outerHTML.should.eql('<div>text<!--comment--></div>');
+	});
 	it('should remove nodes', function () {
 		var node = domify('<div>text<!--comment--><div>text<h1 style="position: relative;"></h1></div></div>');
 		applyPatch(node, {
@@ -208,6 +222,18 @@ describe('applyPatch', function () {
 		should.not.exist(node.querySelector('h1'));
 		node.querySelector('span').textContent.should.eql('oh hai');
 		node.outerHTML.should.eql('<div>text<!--comment--><div>text<span>oh hai</span></div></div>');
+	});
+	it('should replace with an array of children', function () {
+		var node = domify('<div>text<!--comment--><div>text<h1 style="position: relative;"></h1></div></div>');
+		applyPatch(node, {
+			node: [2],
+			childPatches: [
+				{type: 'replace', index: 1, child: ['oh hai', {comment: '2nd'}]}
+			]
+		});
+		should.not.exist(node.querySelector('h1'));
+		node.querySelector('div div').textContent.should.eql('textoh hai');
+		node.outerHTML.should.eql('<div>text<!--comment--><div>textoh hai<!--2nd--></div></div>');
 	});
 	it.skip('should move children around', function () {
 		

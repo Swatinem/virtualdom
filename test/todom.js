@@ -173,5 +173,20 @@ describe('toDOM', function () {
 		d.appendChild(node);
 		d.innerHTML.should.eql('<svg><path d="M150 0 L75 200 L225 200 Z"></path></svg>');
 	});
+	it('should create a DocumentFragment for an array', function () {
+		var vnode = [{tag: 'div'}, {tag: 'span'}];
+		var node = toDOM(vnode);
+		/*global DocumentFragment:true*/
+		node.should.be.an.instanceof(DocumentFragment);
+		node.childNodes.length.should.eql(2);
+	});
+	it('should work with single children', function () {
+		var vnode = {tag: 'div', children: 'text'};
+		var node = toDOM(vnode);
+		node.tagName.should.eql('DIV');
+		node.childNodes.length.should.eql(1);
+		node.childNodes[0].nodeType.should.eql(Node.TEXT_NODE);
+		node.childNodes[0].data.should.eql('text');
+	});
 });
 
