@@ -11,7 +11,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "component": "*",
+    "component": "~0.19.8",
     "component-test": "Swatinem/component-test",
     "component-istanbul": "*",
     "istanbul": "*",
