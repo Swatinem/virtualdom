@@ -1,4 +1,5 @@
 /* vim: set shiftwidth=2 tabstop=2 noexpandtab textwidth=80 wrap : */
+/* global DocumentFragment:true */
 "use strict";
 
 /*var should = */require('chaijs-chai').should();
@@ -83,6 +84,16 @@ describe('fromDOM', function () {
 		v.children.length.should.eql(1);
 		v.children[0].tag.should.eql('path');
 		expect(v.children[0].attributes).to.include({d: 'M150 0 L75 200 L225 200 Z'});
+	});
+	it('should work with DocumentFragments', function () {
+		var els = domify('<span>foo</span><div>bar</div>');
+		els.should.be.an.instanceof(DocumentFragment);
+		els.childNodes.length.should.eql(2);
+		var v = fromDOM(els);
+		v.should.be.an.instanceof(Array);
+		v.length.should.eql(2);
+		v[0].tag.should.eql('span');
+		v[1].tag.should.eql('div');
 	});
 });
 
