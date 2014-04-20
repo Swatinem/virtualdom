@@ -93,7 +93,7 @@ since they have array or hashtable-like accessors in the real DOM.
 {
 	type: 'insert',
 	child: newChild,
-	index: 0, // optional, will append if not set
+	index: 0, // required, will insert at the specified index
 }
 {
 	type: 'replace',

@@ -167,7 +167,7 @@ describe('applyPatch', function () {
 		applyPatch(node, {
 			node: [],
 			childPatches: [
-				{type: 'insert', child: 'text'}
+				{type: 'insert', child: 'text', index: 0}
 			]
 		});
 		node.firstChild.nodeType.should.eql(Node.TEXT_NODE);
@@ -191,7 +191,7 @@ describe('applyPatch', function () {
 		applyPatch(node, {
 			node: [],
 			childPatches: [
-				{type: 'insert', child: ['text', {comment: 'comment'}]}
+				{type: 'insert', child: ['text', {comment: 'comment'}], index: 0}
 			]
 		});
 		node.firstChild.nodeType.should.eql(Node.TEXT_NODE);

@@ -93,8 +93,8 @@ describe('diff', function () {
 		var patches = diff(from, to);
 		patches.length.should.eql(1);
 		patches[0].childPatches.length.should.eql(2);
-		patches[0].childPatches[0].should.eql({type: 'insert', child: 'text'});
-		patches[0].childPatches[1].should.eql({type: 'insert', child: 'text2'});
+		patches[0].childPatches[0].should.eql({type: 'insert', index: 0, child: 'text'});
+		patches[0].childPatches[1].should.eql({type: 'insert', index: 1, child: 'text2'});
 	});
 	it('should create patch for child insert at positions', function () {
 		var from = {tag: 'div', children: [{tag: 'span'}]};
@@ -111,8 +111,8 @@ describe('diff', function () {
 		var patches = diff(from, to);
 		patches.length.should.eql(1);
 		patches[0].childPatches.length.should.eql(2);
-		patches[0].childPatches[0].should.eql({type: 'remove', index: 2});
-		patches[0].childPatches[1].should.eql({type: 'remove', index: 0});
+		patches[0].childPatches[0].should.eql({type: 'remove', index: 0});
+		patches[0].childPatches[1].should.eql({type: 'remove', index: 1});
 	});
 	it('should create patch to remove all children', function () {
 		var from = {tag: 'div', children: ['text', {tag: 'span'}]};
@@ -129,8 +129,8 @@ describe('diff', function () {
 		var patches = diff(from, to);
 		patches.length.should.eql(1);
 		patches[0].childPatches.length.should.eql(2);
-		patches[0].childPatches[0].should.eql({type: 'replace', child: {comment: 'comment2'}, index: 1});
-		patches[0].childPatches[1].should.eql({type: 'replace', child: {comment: 'comment1'}, index: 0});
+		patches[0].childPatches[0].should.eql({type: 'replace', child: {comment: 'comment1'}, index: 0});
+		patches[0].childPatches[1].should.eql({type: 'replace', child: {comment: 'comment2'}, index: 1});
 	});
 	it('should create diffs for children', function () {
 		var from = {tag: 'div', children: [{tag: 'span'}]};
@@ -173,11 +173,9 @@ describe('diff', function () {
 		var from = {tag: 'div', children: [{tag: 'div', key: 1},{tag: 'div', key: 2}]};
 		var to = {tag: 'div', children: [{tag: 'div', key: 3}]};
 		var patches = diff(from, to);
-		patches[0].childPatches.length.should.eql(2);
-		patches[0].childPatches[0].type.should.eql('remove');
-		patches[0].childPatches[0].index.should.eql(0);
-		patches[0].childPatches[1].type.should.eql('replace');
-		patches[0].childPatches[1].index.should.eql(0);
+		patches[0].childPatches.should.eql([
+			{type: 'replace', index: 0, child: {tag: 'div', key: 3}},
+			{type: 'remove', index: 1}]);
 	});
 	it('should flatten the children before diffing', function () {
 		var from = {
