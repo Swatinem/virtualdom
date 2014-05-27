@@ -121,3 +121,5 @@ since they have array or hashtable-like accessors in the real DOM.
 
   LGPLv3
 
+  Released as free software as part of [ChatGrape](https://chatgrape.com/)
+
