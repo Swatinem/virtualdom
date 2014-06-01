@@ -17,9 +17,10 @@ claims to do dom diffing. However, it is a complete MVC framework, complete with
 its own promises implementation, xhr, etc. But at least it is very small, although
 not very readable.
 
-[virtual-dom](https://github.com/Matt-Esch/virtual-dom) seems like a very good
-solution. It is made for use with browserify and pulls in the complete `semver`
-package as a dependency *facepalm*.
+[virtual-dom](https://github.com/Matt-Esch/virtual-dom)/
+[mercury](https://github.com/Raynos/mercury) seems like a very good
+solution. It has a lot more flexibility and deals with `properties` instead of
+with `attributes` by default.
 
 And of course, I don’t want to merely *use* a library. I want to
 *know and understand* the technology, so I might as well implement it myself :-)
